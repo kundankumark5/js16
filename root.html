@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function changeContent() {
+        document.querySelector(".first").innerHTML =     // or we can use document.getElementByclassName("class") or document.getElementByTagName("p/h/span/div") querySelector changes only first match
+          "you have clicked the first para";
+      }
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </head>
+  <body>
+    <p class="first" onclick="changeContent()">first para click to change</p>
+    <p class="second">second para</p>
+    <p class="third">third para</p>
+    <p>click me to see the previous visited window</p>
+    <button onclick="goBack()">goback</button>
+  </body>
+</html>
+

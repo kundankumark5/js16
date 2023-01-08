@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- / events in JS   are the thing that happens to our elements during JS uses elements, events react
+ event is anything that browser does or user does ex loading field changes appearance changes'
+types of events 
+ 
+* inline event ex alert()
+* by calling a function
+* using element and change content by js 
+* using event listeners 
+-->
+
+    <h1>Different types of events in JS</h1>
+    <button onclick=" alert('i am inline way of events')">firstWay</button>
+    <button onclick="secondWayToEvent()">SecondWay</button>
+    <button id="thirdway">ThirdWay</button>
+    <button id="fourthWay">fourthWay</button>
+
+    <script>
+      const secondWayToEvent = () => {
+        alert("general way of events ");
+      };
+
+      const thirdWay = document.getElementById("thirdway");
+      thirdWay.onclick = function () {
+        alert("I am third way of events using id");
+      };
+
+      // const fourthWay = document.getElementById("fourthWay");
+      // fourthWay.addEventListener("click", () => {
+      //   alert("using event listener");
+      // });
+
+      //   differece between onclick and event listener is that onclick overwrite its own previous event means it will respond only last funtion but event listener responds every calling
+    </script>
+
+    <!--What is event object : event object is the child object of the Event object , in   Event object mouseEvent, focusEvent and keyboardEvent are mainly consist, in general way we use Event object to access all the info about event  for example -->
+    <script>
+      const fourthWay = document.getElementById("fourthWay");
+      const checkEvent = () => {
+        alert("we are seeing event info "), console.log(event);
+        console.log(event.target);
+        console.log(event.type);
+      };
+      fourthWay.addEventListener("click", checkEvent);
+    </script>
+    <!-- mouse event in js : any event happening through mouse is mouse event, there are two eventListener that is mouseEnter and mouseLeave there are two types of mouse event mouseDown() and mouseUp() when the mouse button is pressed down mouseDown() event is triggered when it released mouseUp() will be triggered  ex-->
+    <p id="myP" onmousedown="mouseDown()" onmouseup="mouseUp()">
+      click the text!
+    </p>
+    <div class="main-div">
+      <div id="box" style="background-color: blue; width: 80px; height: 20px">
+        click
+      </div>
+    </div>
+    <script>
+      function mouseDown() {
+        document.getElementById("myP").style.color = "red";
+      }
+      function mouseUp() {
+        document.getElementById("myP").style.color = "yellow";
+      }
+
+      // mouse event listener
+      const mEnter = document.getElementById("box");
+      mEnter.addEventListener("mouseenter", () => {
+        mEnter.style.backgroundColor = "red";
+        console.log("mouse enter");
+      });
+      mEnter.addEventListener("mouseleave", () => {
+        mEnter.style.backgroundColor = "yellow";
+        console.log("mouse leave");
+      }); //
+    </script>
+
+    <!-- keyboard event when user presses a key keyboard event is occurred, belongs to the keyboardEvent object there are three events onkeypress onkeydown onkeyup -->
+    <p>
+      on key down event is triggered when a user presses a key in the input
+      field
+    </p>
+    <input
+      type="text"
+      onkeydown="keyDown()"
+      onkeypress="keyPress()"
+      onkeyup="keyUp()"
+    />
+    <p id="keysEvent"></p>
+    <script>
+      const keyPress = () => {
+        document.getElementById(
+          "keysEvent"
+        ).innerHTML = `you pressed ${event.key} and its key code was ${event.code}`;
+      };
+
+      const keyDown = () =>
+        (document.getElementById("keysEvent").innerHTML = "key down");
+      const keyUp = () =>
+        (document.getElementById("keysEvent").innerHTML = "key up");
+      // const keyPress = () =>
+      //   (document.getElementById("keysEvent").innerHTML = "key press");
+    </script>
+
+    <!-- js input event : the onchange event occurs when an element is changed and for radiobuttons and checkboxes the onchange event occurs when the checked state is changed   -->
+    <div>
+      <label for="">your name</label>
+      <input type="text" name="" id="ice" />
+      <label for=" "
+        >choose an ice cream flavor
+        <select name="iceCreams" id="iceCreams" onchange="selectElements()">
+          <option value="">select one....</option>
+          <option value="chocolate ">chocolate</option>
+          <option value="sardine ">sardine</option>
+          <option value="vanila ">vanila</option>
+        </select>
+      </label>
+      <div id="result"></div>
+      <script>
+        // const selectElements = () => {
+        //   const inputChange = document.getElementById("ice").value;
+        //   const iceCreams = document.getElementById("iceCreams").value;
+        //   document.getElementById(
+        //     "result"
+        //   ).innerHTML = `Mr ${inputChange} have selected ${iceCreams} ice-cream flavor`;
+        // };
+        const iceCreams = document.getElementById("iceCreams");
+        iceCreams.addEventListener("change", () => {
+          //change is an eventListener
+          const inputChange = document.getElementById("ice").value;
+          const iceCreams = document.getElementById("iceCreams").value;
+          document.getElementById(
+            "result"
+          ).innerHTML = `Mr ${inputChange} selected ${iceCreams} iceCream flavor`;
+        });
+      </script>
+    </div>
+    <!-- 
+                      * JS timing based events 
+
+The window object allows execution of a set of code(generally functions ) at a specified time intervals
+these time intervals are called timing based events 
+the two key methods to use with js are : *setTimeout , setInterval , clearTimeout , clearInterval
+
+* setTimeout(function, milliseconds) :- executes function after waiting specified milliseconds
+* clearTimeout (reference of setTimeout's function, milliseconds): stop setTimeout's function at a specified milliseconds
+* setInterval(function, milliseconds) :- same as setTimeout but it repeat function continuously 
+* clearInterval(reference of setInterval's function, milliseconds):- same as clear timeout it stops setInterval's fun
+
+-->
+    <!-- setTimeout ex -->
+    <div>
+      <div>want to know my name 💁 ?</div>
+
+      <div id="showMyName"></div>
+      <br />
+      <button
+        id="btn"
+        style="width: 80px; height: 40px; background-color: yellow"
+      >
+        click me
+      </button>
+    </div>
+    <script>
+      const showMyName = document.querySelector("#showMyName");
+      const btn = document.querySelector("#btn");
+      const MyName = () => {
+        showMyName.innerHTML = "loading..";
+        setTimeout(() => {
+          showMyName.innerHTML = "RadhaMadhav";
+        }, 1000);
+      };
+
+      btn.addEventListener("click", MyName);
+    </script>
+    <!-- clearTimeout -->
+    <div>
+      <div>
+        <p>click 'try it' and wait 3seconds a hello alert will be appeared</p>
+        <p>want to stop , click 'stop it' before 2 seconds are up</p>
+        <button onclick="myVar=setTimeout(myFunction,3000)">Try it</button>
+        <button onclick="clearTimeout(myVar)">Stop It</button>
+        <p id="hi"></p>
+        <!--always ref of settimeout will be passed-->
+      </div>
+    </div>
+    <script>
+      function myFunction() {
+        alert("hello");
+      }
+    </script>
+    <!-- setInterval -->
+    <div>
+      <div>
+        <p>can you please stop me when i reach at 5 #️⃣</p>
+        <button
+          id="button"
+          style="width: 80px; height: 40px; background-color: yellow"
+        >
+          start
+        </button>
+      </div>
+    </div>
+    <script>
+      const para = document.querySelector("p");
+      const button = document.querySelector("#button");
+
+      let num = 0;
+
+      const stopNum = () => {
+        para.innerHTML = "loading...🌚";
+        setInterval(() => {
+          para.innerHTML = `${num}`;
+          num++;
+        }, 1000);
+      };
+      button.addEventListener("click", stopNum); // however we are unable to stop it now, so here comes clearInterval
+    </script>
+    <!-- clearInterval -->
+
+    <div>
+      <div>
+        <p>can you please stop me when i reach at 5 #️⃣</p>
+        <button
+          id="button1"
+          style="width: 80px; height: 40px; background-color: yellow"
+        >
+          start
+        </button>
+        <button
+          id="button2"
+          style="width: 80px; height: 40px; background-color: yellow"
+        >
+          stop
+        </button>
+      </div>
+    </div>
+    <script>
+      const para2 = document.querySelector("p");
+      const button1 = document.querySelector("#button1");
+      const clrInterval = document.querySelector("#button2");
+
+      let num1 = 0;
+      let timeRef;
+      const stopNum1 = () => {
+        para2.innerHTML = "loading...🌚";
+        timeRef = setInterval(() => {
+          para2.innerHTML = `${num1}`;
+          num1++;
+        }, 1000);
+      };
+      button1.addEventListener("click", stopNum1);
+      clrInterval.addEventListener("click", () => {
+        clearInterval(timeRef);
+      });
+    </script>
+
+    <!-- difference between setTimeOut and set interval
+    setTimeout invoke our function within the specified time only one time , but setInterval invokes the same function again and again after specified time until we stop it forcefully
+    -->
+  </body>
+</html>
