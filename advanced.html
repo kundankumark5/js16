@@ -1,0 +1,55 @@
+<!-- 
+event propagation  : the event propagation mode determines in which order  the elements receive the element 
+ propagation is further divided into 3 major sections 1.bubble propagation, 2.capture propagation and target prop
+ event bubbling :with event bubbling the event is first captured and handled by the innermost element and then propagated to the outer element(*events propagated this way by default if propagation is not mentioned explicitly*)
+ while in event capturing : the event is first captured and handled by the outermost element and then propagated to the inner elements , capturing is also known as trickling that is top to bottom 
+ when it is going from the window to the event target phase that is top to bottom(window>document>html>body>div>button) it's called capture phase and when it is going from the event to the parent window that is bottom to top(button>div>body>html>doc>window) it's called bubble phase, target phase : which receive event 
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      id="parentDiv"
+      class="parentDiv"
+      style="
+        width: 200px;
+        height: 200px;
+        background-color: yellow;
+        text-align: center;
+      "
+    >
+      <div
+        id="childDiv"
+        class="childDiv"
+        style="width: 50px; height: 50px; background-color: red"
+      ></div>
+    </div>
+    <script>
+      const parentCall = () => {
+        alert("parent div call ");
+        console.log("parent div call");
+      };
+
+      const childCall = () => {
+        alert("child div call");
+        console.log("child div call");
+      };
+
+      document
+        .getElementById("parentDiv")
+        .addEventListener("click", parentCall, true); // boolean arg is optional , and it's false by default
+      document
+        .getElementById("childDiv")
+        .addEventListener("click", childCall, true); //but when it's true it change event bubbling to capturing
+
+      // so third argument in add event listener used to add event propagation and by default it's false it means when 3rd arg is false or blank event propagation is event bubbling(inner to outer ) but when it's true event propagation is event capturing (outer to inner)
+    </script>
+  </body>
+</html>
