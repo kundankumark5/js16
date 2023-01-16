@@ -453,17 +453,68 @@ console.log(Math.trunc(-4.6)); // it will return only digits before the decimal 
 // if we want to know node we can use document.body.childNodes    it includes enter tab and whitespace as text nodes
 // document.body.hasChildNodes() will return true or false depending on the document have children
 // document.body.firstChild will return enter tab and whitespace while document.body.firstElementChild will return actual child div span etc.
-// simply use document.querySelector('className or id').style.color(or whatever you want)='value'; 
+// simply use document.querySelector('className or id').style.color(or whatever you want)='value';
 
-// if we want to fetch the sibling element 
+// if we want to fetch the sibling element
 // document.body.previousElementSibling; or document.body.nextElementSibling  // we can replace body with head p h or any node to fetch that element's sibling
 
 // events in JS   are the thing that happens to our elements during JS uses elements, events react
 // event is anything that browser does or user does ex loading field changes appearance changes'
-// types of events 
+// types of events
 // inline event ex alert()
 
 // by calling a function
-// using onclick 
+// using onclick
 // using event listeners
 // rest in event file
+
+//
+// using unicode for icons from font awesome
+const tempLoad = () => {
+  let temp = document.querySelector("#temp");
+  temp.innerHTML = "&#xf2cb";
+  setTimeout(
+    () => ((temp.innerHTML = "&#xf2ca"), (temp.style.color = "green")),
+    1000
+  );
+  setTimeout(
+    () => ((temp.innerHTML = "&#xf2c9"), (temp.style.color = "#f8b627")),
+    2000
+  );
+  setTimeout(() => (temp.innerHTML = "&#xf2c8"), 3000);
+  setTimeout(
+    () => ((temp.innerHTML = "&#xf2c7"), (temp.style.color = "#d63031")),
+    4000
+  );
+};
+tempLoad();
+setInterval(tempLoad, 5000);
+
+const calculateTemp = () => {
+  const tempInput = document.getElementById("tempInput").value;
+  // console.log(tempInput);
+  const tempSelected = document.getElementById("temp_diff");
+  const selectedVal = temp_diff.options[tempSelected.selectedIndex].value;
+  // console.log(selectedVal);
+
+  const celToFah = (cel) => {
+    let fahrenheit = Math.round((cel * 9) / 5 + 32);
+    return fahrenheit;
+  };
+
+  const fahToCel = (fah) => {
+    let celsius = Math.round(((fah - 32) * 5) / 9);
+    return celsius;
+  };
+
+  let result;
+  if (selectedVal == "cel") {
+    result = celToFah(tempInput);
+    document.getElementById(
+      "resultContainer"
+    ).innerHTML = `${result}*fahrenheit`;
+  } else {
+    result = fahToCel(tempInput);
+    document.getElementById("resultContainer").innerHTML = `${result}*celsius`;
+  }
+};

@@ -50,6 +50,20 @@ event propagation  : the event propagation mode determines in which order  the e
         .addEventListener("click", childCall, true); //but when it's true it change event bubbling to capturing
 
       // so third argument in add event listener used to add event propagation and by default it's false it means when 3rd arg is false or blank event propagation is event bubbling(inner to outer ) but when it's true event propagation is event capturing (outer to inner)
+
+      //   callback function : when a function is passed as an argument of another function it is called callback func
+      //   higher order function :the function which accept another func as its call back func is called higher order func
+      // for ex let's create a calculator
+      const add = (a, b) => a + b;
+      const sub = (a, b) => {
+        return Math.abs(a - b);
+      };
+      const mult = (a, b) => a * b;
+      //   now we will pass all these 3 functions as arg of our calc fun so these 3 will became callback func
+      const calc = (a, b, operation) => operation(a, b); //where op is add subs or mult
+      // for ex
+
+      console.log(calc(6, 4, mult));
     </script>
   </body>
 </html>

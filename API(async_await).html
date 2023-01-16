@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h3>😃 Best Joke to make your day ✌️</h3>
+      <div id="joke" class="joke">Awesome jokes are loading....</div>
+      <button id="jokeBtn" class="btn">Next Joke</button>
+    </div>
+
+    <script>
+      // async is a prefix to add any func in  asynchronomous js, using to create asynchronomous obj or fun which means simultaneously no wait for any other operations
+      // async function funcName(){}    or const funcName = async ()=>{   }
+
+      // fetching api using async await is same as fetch but it reduce its complexity by different response handling mechanism  it prohibits using then rather we use await
+      //   for err handling in async await we have to write everything in try catch block as ex below
+
+      const generateJokes = async () => {
+        try {
+          const setHeader = {
+            headers: {
+              Accept: "application/json",
+            },
+          };
+          const res = await fetch("https://icanhazdadjoke.com/", setHeader);
+          const data = await res.json();
+          jokes.innerHTML = data.joke;
+        } catch (err) {
+          console.log(`the error msg is ${err}`);
+        }
+      };
+      const jokes = document.querySelector("#joke");
+      const jokeBtn = document.querySelector("#jokeBtn");
+      jokeBtn.addEventListener("click", generateJokes);
+      generateJokes();
+    </script>
+  </body>
+</html>

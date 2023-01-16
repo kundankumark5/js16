@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h3>😃 Best Joke to make your day ✌️</h3>
+      <div id="joke" class="joke">Awesome jokes are loading....</div>
+      <button id="jokeBtn" class="btn">Next Joke</button>
+    </div>
+
+    <script>
+      // Promises :
+
+      // when we hit aPi using fetch method it returns Promise , promise have to two states fulfilled or rejected, majorly we consume promise rather than create
+
+      // async/ await
+
+      const generateJokes = () => {
+        // fetch("https://icanhazdadjoke.com/") // imp : it will return html but we need json so go on postman and type application/json in header sec's value schema to see proper result but to bring the same result we need to add a setHeader function to fetch  fetch("https://icanhazdadjoke.com/",setHeader) as second arg so as following
+        const setHeader = {
+          headers: {
+            Accept: "application/json",
+          },
+        };
+
+        fetch("https://icanhazdadjoke.com/", setHeader)
+          .then((res) => res.json())
+          .then((data) => {
+            jokes.innerHTML = data.joke;
+          })
+          .catch((err) => console.log(err));
+      };
+      const jokes = document.querySelector("#joke");
+      const jokeBtn = document.querySelector("#jokeBtn");
+      jokeBtn.addEventListener("click", generateJokes);
+      generateJokes();
+    </script>
+  </body>
+</html>
